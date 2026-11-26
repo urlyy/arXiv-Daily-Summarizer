@@ -33,7 +33,7 @@ cd arxiv-daily-summarizer
 | `DEEPSEEK_API_KEY` | DeepSeek API 密钥 | `ms-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` |
 | `SENDER_EMAIL` | 发件人邮箱地址 | `your-email@gmail.com` |
 | `SENDER_PASSWORD` | 邮箱应用专用密码 | `abcd efgh ijkl mnop` |
-| `RECEIVER_EMAIL` | 收件人邮箱地址 | `receiver@example.com` |
+| `RECEIVER_EMAIL` | 单个邮箱或多个邮箱组成的 JSON 数组 | `["alice@example.com","bob@example.com"]` |
 | `SMTP_SERVER` | SMTP 服务器地址（可选） | `smtp.gmail.com` |
 | `SMTP_PORT` | SMTP 端口（可选） | `587` |
 

@@ -1,3 +1,4 @@
+import json
 import os
 import smtplib
 import arxiv
@@ -808,6 +809,18 @@ def generate_email_content(papers_with_summaries, language='zh'):
     return html
 
 
+def parse_recipients(value):
+    value = value.strip()
+    addresses = json.loads(value) if value.startswith('[') else [value]
+    if not addresses or any(
+        not isinstance(address, str)
+        or not re.fullmatch(r'[^@,;<>\s]+@[^@,;<>\s]+', address.strip())
+        for address in addresses
+    ):
+        raise ValueError("RECEIVER_EMAIL must contain an email address or a nonempty JSON array of addresses")
+    return list(dict.fromkeys(address.strip() for address in addresses))
+
+
 def send_email(subject, html_content):
     """
     Send email via SMTP
@@ -819,13 +832,14 @@ def send_email(subject, html_content):
     Returns:
         bool: True if successful, False otherwise
     """
-    print(f"\n📧 Sending email to {RECEIVER_EMAIL}...")
+    recipients = parse_recipients(RECEIVER_EMAIL)
+    print(f"\n📧 Sending email to {len(recipients)} recipient(s)...")
     
     try:
         message = MIMEMultipart('alternative')
         message['Subject'] = subject
         message['From'] = SENDER_EMAIL
-        message['To'] = RECEIVER_EMAIL
+        message['To'] = ', '.join(recipients)
         
         html_part = MIMEText(html_content, 'html', 'utf-8')
         message.attach(html_part)
@@ -833,7 +847,7 @@ def send_email(subject, html_content):
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.send_message(message)
+            server.send_message(message, to_addrs=recipients)
         
         print(f"✅ Email sent successfully!")
         return True
