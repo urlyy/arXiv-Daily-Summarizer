@@ -1,6 +1,7 @@
 import json
 import os
 import smtplib
+from category_names import category_name
 import arxiv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -747,7 +748,7 @@ def generate_email_content(papers_with_summaries, language='zh'):
         
         # Format category tags
         categories_html = ''.join([
-            f'<span class="category-tag">{cat}</span>' 
+            f'<span class="category-tag">{category_name(cat, language)}</span>' 
             for cat in paper['categories'][:3]
         ])
         
