@@ -12,7 +12,10 @@ from difflib import SequenceMatcher
 # ========== Configuration ==========
 
 # arXiv search configuration
-CATEGORIES = ['cs.AI', 'cs.CV', 'cs.CL']  # Research areas of interest
+CATEGORIES = [
+    'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
+    'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
+]
 MAX_RESULTS = 5  # Number of papers to send daily
 MIN_PAPERS_PER_CATEGORY = 1  # Minimum papers per category to ensure balance
 
@@ -22,8 +25,8 @@ EMAIL_LANGUAGE = os.environ.get('EMAIL_LANGUAGE', 'zh')  # Default to Chinese
 
 # DeepSeek API configuration
 DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY')
-DEEPSEEK_BASE_URL = 'https://api-inference.modelscope.cn/v1'
-DEEPSEEK_MODEL = 'deepseek-ai/DeepSeek-V3.2-Exp'
+DEEPSEEK_BASE_URL = 'https://api.deepseek.com/v1'
+DEEPSEEK_MODEL = 'deepseek-flash'
 
 # Email configuration
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL')
@@ -291,11 +294,19 @@ def get_latest_papers():
     print(f"\n⚖️ Ensuring category balance...")
     selected_papers = []
     
-    for category in CATEGORIES:
+    ranked_categories = sorted(
+        (category for category in CATEGORIES if papers_by_category[category]),
+        key=lambda category: (papers_by_category[category][0]['quality_score'],
+                              papers_by_category[category][0]['published']),
+        reverse=True,
+    )
+    for category in ranked_categories:
+        if len(selected_papers) >= MAX_RESULTS:
+            break
         category_papers = papers_by_category[category]
         if category_papers:
             # Take top MIN_PAPERS_PER_CATEGORY papers from each category
-            num_to_take = min(MIN_PAPERS_PER_CATEGORY, len(category_papers))
+            num_to_take = min(MIN_PAPERS_PER_CATEGORY, len(category_papers), MAX_RESULTS - len(selected_papers))
             selected_papers.extend(category_papers[:num_to_take])
             print(f"  Selected {num_to_take} papers from {category}")
     

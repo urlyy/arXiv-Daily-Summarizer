@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-- 📚 **Smart Paper Selection**: Fetches latest papers from cs.AI, cs.CV, and cs.CL categories
+- 📚 **Smart Paper Selection**: Fetches latest papers from the 14 configured arXiv categories
 - 🎯 **Category Balance**: Ensures representation from each research area
 - 🏆 **Quality Filtering**: Scores papers based on multiple quality indicators
 - 🔄 **Intelligent Deduplication**: Detects and removes similar papers automatically
@@ -75,19 +75,34 @@ The system runs automatically at 8:00 AM Beijing Time daily (configurable in `.g
 
 ### Modify Research Areas
 
-Edit the `CATEGORIES` variable in `fetch_papers.py`:
+Edit `CATEGORIES` in `fetch_papers.py`. The default is shown below. Choose additional categories from the table.
 
 ```python
-CATEGORIES = ['cs.AI', 'cs.CV', 'cs.CL']  # Add other categories as needed
+CATEGORIES = [
+    'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
+    'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
+]
 ```
 
-Common arXiv categories:
-- `cs.AI` - Artificial Intelligence
-- `cs.CV` - Computer Vision
-- `cs.CL` - Computation and Language (NLP)
-- `cs.LG` - Machine Learning
-- `cs.RO` - Robotics
-- `cs.NE` - Neural and Evolutionary Computing
+| Category | Research area |
+| --- | --- |
+| `cs.AI` | Artificial intelligence |
+| `cs.CV` | Computer vision and pattern recognition |
+| `cs.CL` | Computation and language (NLP) |
+| `cs.LG` | Machine learning |
+| `cs.NE` | Neural and evolutionary computing |
+| `cs.MA` | Multiagent systems |
+| `cs.RO` | Robotics |
+| `cs.SE` | Software engineering |
+| `cs.PL` | Programming languages |
+| `cs.DB` | Databases |
+| `cs.IR` | Information retrieval |
+| `cs.DC` | Distributed, parallel, and cluster computing |
+| `cs.OS` | Operating systems |
+| `cs.DS` | Data structures and algorithms |
+| `cs.HC` | Human-computer interaction |
+| `cs.CR` | Cryptography and security |
+| `cs.NI` | Networking and Internet architecture |
 
 ### Modify Number of Papers
 
@@ -191,7 +206,7 @@ The system detects similar papers by:
 ## 📊 Usage Limits
 
 - **GitHub Actions**: 2000 minutes/month free (this project uses ~2-3 minutes/day)
-- **DeepSeek API**: Free tier provided by ModelScope
+- **DeepSeek API**: Usage is billed to your DeepSeek account
 - **Email**: Depends on your email provider's limits
 
 ## ❓ FAQ

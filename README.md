@@ -6,7 +6,7 @@
 
 ## ✨ 功能特点
 
-- 📚 **智能论文选择**：从 cs.AI、cs.CV、cs.CL 三个领域获取最新论文
+- 📚 **智能论文选择**：从配置的 14 个 arXiv 分类获取最新论文
 - 🎯 **领域平衡**：确保每个研究领域都有代表性论文
 - 🏆 **质量筛选**：基于多个质量指标对论文评分
 - 🔄 **智能去重**：自动检测并移除相似论文
@@ -38,7 +38,7 @@ cd arxiv-daily-summarizer
 | `SMTP_PORT` | SMTP 端口（可选） | `587` |
 
 #### Api 配置说明
-本项目使用的是 ModelScope 的免费 api，你也可以访问官网[魔塔社区](https://www.modelscope.cn/)申请，或者换成你自己的 api 。
+使用 DeepSeek 官方 API 和 `deepseek-flash` 模型，通过 `DEEPSEEK_API_KEY` 设置密钥。
 
 #### 📮 邮箱配置说明
 
@@ -76,19 +76,34 @@ cd arxiv-daily-summarizer
 
 ### 修改关注领域
 
-编辑 `fetch_papers.py` 中的 `CATEGORIES` 变量：
+直接编辑 `fetch_papers.py` 中的 `CATEGORIES`。默认配置如下，可从下表选择其他分类。
 
 ```python
-CATEGORIES = ['cs.AI', 'cs.CV', 'cs.CL']  # 可以添加其他分类
+CATEGORIES = [
+    'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
+    'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
+]
 ```
 
-常用的 arXiv 分类：
-- `cs.AI` - 人工智能
-- `cs.CV` - 计算机视觉
-- `cs.CL` - 计算语言学/自然语言处理
-- `cs.LG` - 机器学习
-- `cs.RO` - 机器人
-- `cs.NE` - 神经与进化计算
+| 分类代码 | 研究方向 |
+| --- | --- |
+| `cs.AI` | 人工智能 |
+| `cs.CV` | 计算机视觉与模式识别 |
+| `cs.CL` | 计算与语言（自然语言处理） |
+| `cs.LG` | 机器学习 |
+| `cs.NE` | 神经与进化计算 |
+| `cs.MA` | 多智能体系统 |
+| `cs.RO` | 机器人学 |
+| `cs.SE` | 软件工程 |
+| `cs.PL` | 编程语言 |
+| `cs.DB` | 数据库 |
+| `cs.IR` | 信息检索 |
+| `cs.DC` | 分布式、并行与集群计算 |
+| `cs.OS` | 操作系统 |
+| `cs.DS` | 数据结构与算法 |
+| `cs.HC` | 人机交互 |
+| `cs.CR` | 密码学与安全 |
+| `cs.NI` | 网络与互联网架构 |
 
 ### 修改论文数量
 
@@ -195,7 +210,7 @@ python test_arxiv.py
 ## 📊 使用限制
 
 - **GitHub Actions**：每月 2000 分钟免费额度（本项目每天约消耗 2-3 分钟）
-- **DeepSeek API**：ModelScope 提供的免费额度
+- **DeepSeek API**：按 DeepSeek 官方账户计费
 - **邮件发送**：取决于你的邮箱服务商限制
 
 ## ❓ 常见问题
