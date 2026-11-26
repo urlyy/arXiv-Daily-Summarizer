@@ -69,7 +69,7 @@ Add the following secrets:
 
 ### 4. Wait for Daily Digest
 
-The system runs automatically at 8:00 AM Beijing Time daily (configurable in `.github/workflows/daily_arxiv.yml`).
+The system runs automatically at 7:00 AM Beijing Time daily (configurable in `.github/workflows/daily_arxiv.yml`).
 
 ## 🛠️ Customization
 
@@ -123,11 +123,11 @@ Edit the cron expression in `.github/workflows/daily_arxiv.yml`:
 
 ```yaml
 schedule:
-  - cron: '0 0 * * *'  # UTC time, add 8 hours for Beijing Time
+  - cron: '0 23 * * *'  # UTC time, add 8 hours for Beijing Time
 ```
 
 Time reference:
-- `'0 0 * * *'` - 08:00 Beijing Time
+- `'0 23 * * *'` - 07:00 Beijing Time
 - `'0 1 * * *'` - 09:00 Beijing Time
 - `'0 12 * * *'` - 20:00 Beijing Time
 
