@@ -36,8 +36,8 @@ Add the following secrets:
 | `SENDER_EMAIL` | Sender email address | `your-email@gmail.com` |
 | `SENDER_PASSWORD` | Email app-specific password | `abcd efgh ijkl mnop` |
 | `RECEIVER_EMAIL` | One email address or a JSON array of addresses | `["alice@example.com","bob@example.com"]` |
-| `SMTP_SERVER` | SMTP server address (optional) | `smtp.gmail.com` |
-| `SMTP_PORT` | SMTP port (optional) | `587` |
+| `SMTP_SERVER` | SMTP server address (required for GitHub Actions) | `smtp.gmail.com` |
+| `SMTP_PORT` | SMTP port (required for GitHub Actions) | `587` |
 
 #### 📮 Email Configuration Guide
 

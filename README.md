@@ -34,8 +34,8 @@ cd arxiv-daily-summarizer
 | `SENDER_EMAIL` | 发件人邮箱地址 | `your-email@gmail.com` |
 | `SENDER_PASSWORD` | 邮箱应用专用密码 | `abcd efgh ijkl mnop` |
 | `RECEIVER_EMAIL` | 单个邮箱或多个邮箱组成的 JSON 数组 | `["alice@example.com","bob@example.com"]` |
-| `SMTP_SERVER` | SMTP 服务器地址（可选） | `smtp.gmail.com` |
-| `SMTP_PORT` | SMTP 端口（可选） | `587` |
+| `SMTP_SERVER` | SMTP 服务器地址（GitHub Actions 必填） | `smtp.gmail.com` |
+| `SMTP_PORT` | SMTP 端口（GitHub Actions 必填） | `587` |
 
 #### Api 配置说明
 使用 DeepSeek 官方 API 和 `deepseek-flash` 模型，通过 `DEEPSEEK_API_KEY` 设置密钥。
