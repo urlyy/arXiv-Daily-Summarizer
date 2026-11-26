@@ -33,8 +33,8 @@ DEEPSEEK_MODEL = 'deepseek-flash'
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL')
 SENDER_PASSWORD = os.environ.get('SENDER_PASSWORD')
 RECEIVER_EMAIL = os.environ.get('RECEIVER_EMAIL')
-SMTP_SERVER = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
-SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
+SMTP_SERVER = os.environ.get('SMTP_SERVER', '').strip() or 'smtp.gmail.com'
+SMTP_PORT = int(os.environ.get('SMTP_PORT', '').strip() or '587')
 
 # Quality filtering thresholds
 MIN_ABSTRACT_LENGTH = 100  # Minimum abstract length (characters)
