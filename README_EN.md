@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-- 📚 **Smart Paper Selection**: Fetches latest papers from the 5 configured arXiv categories
+- 📚 **Smart Paper Selection**: Fetches latest papers from the 4 configured arXiv categories
 - 🎯 **Category Balance**: Ensures representation from each research area
 - 🏆 **Quality Filtering**: Scores papers based on multiple quality indicators
 - 🔄 **Intelligent Deduplication**: Detects and removes similar papers automatically
@@ -78,7 +78,7 @@ The system runs automatically at 7:00 AM Beijing Time daily (configurable in `.g
 Edit `CATEGORIES` in `fetch_papers.py`. The default is shown below. Choose additional categories from the table.
 
 ```python
-CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
+CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.LG']
 ```
 
 | Category | Research area |
@@ -100,6 +100,8 @@ CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
 | `cs.HC` | Human-computer interaction |
 | `cs.CR` | Cryptography and security |
 | `cs.NI` | Networking and Internet architecture |
+
+Papers must provide a GitHub repository for their own work in the PDF. Edit [the screening prompt](screening_prompt.txt) to update the domain filter.
 
 ### Modify Number of Papers
 

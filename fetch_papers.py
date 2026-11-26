@@ -2,6 +2,7 @@ import json
 import os
 import smtplib
 from category_names import category_name
+from paper_screening import screen_paper
 import arxiv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -14,7 +15,7 @@ from difflib import SequenceMatcher
 # ========== Configuration ==========
 
 # arXiv search configuration
-CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
+CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.LG']
 MAX_RESULTS = 20  # Number of papers to send daily
 MIN_PAPERS_PER_CATEGORY = 1  # Minimum papers per category to ensure balance
 
@@ -48,7 +49,7 @@ TEXT_TEMPLATES = {
         'days_ago': '天前',
         'published_today': '<strong>{count} 篇</strong>是今天发布',
         'published_yesterday': '<strong>{count} 篇</strong>是昨天发布',
-        # 'published_older_single': '<strong>{count} 篇</strong>是 {days} 天前发布（可能已读过）',
+        'published_older_single': '<strong>{count} 篇</strong>是 {days} 天前发布（可能已读过）',
         'published_older_multi': '<strong>{count} 篇</strong>是 2 天及更早前发布（可能已读过）',
         'notice_text': '本次推送的 {total} 篇论文中，{parts}。',
         'new_today': '今日新发布',
@@ -72,7 +73,7 @@ TEXT_TEMPLATES = {
         'days_ago': 'days ago',
         'published_today': '<strong>{count} papers</strong> published today',
         'published_yesterday': '<strong>{count} papers</strong> published yesterday',
-        # 'published_older_single': '<strong>{count} paper</strong> published {days} days ago (may have been read)',
+        'published_older_single': '<strong>{count} paper</strong> published {days} days ago (may have been read)',
         'published_older_multi': '<strong>{count} papers</strong> published 2+ days ago (may have been read)',
         'notice_text': 'Of the {total} papers in this digest, {parts}.',
         'new_today': 'NEW TODAY',
@@ -289,6 +290,16 @@ def get_latest_papers():
             print(f"  ❌ Error searching {category}: {str(e)}")
             continue
     
+    screening_client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL)
+    for category, candidates in papers_by_category.items():
+        eligible = []
+        for paper in candidates:
+            repo = screen_paper(paper, screening_client, DEEPSEEK_MODEL)
+            if repo:
+                paper['github_url'] = repo
+                eligible.append(paper)
+        papers_by_category[category] = eligible
+
     # Step 2: Ensure category balance - select minimum papers from each category
     print(f"\n⚖️ Ensuring category balance...")
     selected_papers = []
@@ -791,6 +802,7 @@ def generate_email_content(papers_with_summaries, language='zh'):
             
             <div class="links">
                 <a href="{paper['pdf_url']}" class="link-button">📄 {txt['view_pdf']}</a>
+                <a href="{paper['github_url']}" class="link-button">GitHub</a>
             </div>
         </div>
         """

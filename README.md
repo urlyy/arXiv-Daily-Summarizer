@@ -6,7 +6,7 @@
 
 ## ✨ 功能特点
 
-- 📚 **智能论文选择**：从配置的 5 个 arXiv 分类获取最新论文
+- 📚 **智能论文选择**：从配置的 4 个 arXiv 分类获取最新论文
 - 🎯 **领域平衡**：确保每个研究领域都有代表性论文
 - 🏆 **质量筛选**：基于多个质量指标对论文评分
 - 🔄 **智能去重**：自动检测并移除相似论文
@@ -79,7 +79,7 @@ cd arxiv-daily-summarizer
 直接编辑 `fetch_papers.py` 中的 `CATEGORIES`。默认配置如下，可从下表选择其他分类。
 
 ```python
-CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
+CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.LG']
 ```
 
 | 分类代码 | 研究方向 |
@@ -101,6 +101,8 @@ CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
 | `cs.HC` | 人机交互 |
 | `cs.CR` | 密码学与安全 |
 | `cs.NI` | 网络与互联网架构 |
+
+仅收录原文 PDF 提供本工作 GitHub 仓库的论文。垂直领域筛选规则在 [筛选提示词](screening_prompt.txt) 中维护。
 
 ### 修改论文数量
 
