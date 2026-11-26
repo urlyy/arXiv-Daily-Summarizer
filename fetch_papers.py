@@ -549,9 +549,9 @@ def generate_date_notice(date_stats, papers, language='zh'):
         text_color = "#155724"
     
     html = f"""
-    <div style="background: {bg_color}; border-left: 4px solid {border_color}; padding: 15px 20px; margin-bottom: 25px; border-radius: 5px;">
+    <div style="background: {bg_color}; border-left: 4px solid {border_color}; padding: 7px 12px; margin-bottom: 10px; border-radius: 5px;">
         <div style="color: {text_color}; font-size: 15px; line-height: 1.6;">
-            <span style="font-size: 20px; margin-right: 8px;">{icon}</span>
+            <span style="font-size: 15px; margin-right: 4px;">{icon}</span>
             <strong>{txt['date_notice']}:</strong> {notice_message}
         </div>
     </div>
@@ -582,6 +582,7 @@ def generate_email_content(papers_with_summaries, language='zh'):
     html = f"""
     <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body {{
                 font-family: 'Segoe UI', Arial, sans-serif;
@@ -589,39 +590,39 @@ def generate_email_content(papers_with_summaries, language='zh'):
                 color: #333;
                 max-width: 800px;
                 margin: 0 auto;
-                padding: 20px;
+                padding: 10px;
                 background-color: #f5f5f5;
             }}
             .header {{
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 color: white;
-                padding: 30px;
+                padding: 12px;
                 border-radius: 10px;
                 text-align: center;
-                margin-bottom: 30px;
+                margin-bottom: 10px;
             }}
             .header h1 {{
                 margin: 0;
-                font-size: 28px;
+                font-size: 22px;
             }}
             .date {{
                 font-size: 14px;
                 opacity: 0.9;
-                margin-top: 10px;
+                margin-top: 2px;
             }}
             .paper {{
                 background: white;
-                padding: 25px;
-                margin-bottom: 25px;
+                padding: 12px 16px;
+                margin-bottom: 10px;
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 position: relative;
             }}
             .paper-title {{
                 color: #667eea;
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: bold;
-                margin-bottom: 10px;
+                margin-bottom: 4px;
                 line-height: 1.4;
             }}
             .quality-badge {{
@@ -637,12 +638,12 @@ def generate_email_content(papers_with_summaries, language='zh'):
             .meta {{
                 color: #666;
                 font-size: 14px;
-                margin-bottom: 15px;
-                padding-bottom: 15px;
+                margin-bottom: 6px;
+                padding-bottom: 5px;
                 border-bottom: 2px solid #f0f0f0;
             }}
             .meta-item {{
-                margin: 5px 0;
+                margin: 1px 0;
             }}
             .date-badge {{
                 display: inline-block;
@@ -670,7 +671,7 @@ def generate_email_content(papers_with_summaries, language='zh'):
             .category-tag {{
                 background: #e8eaf6;
                 color: #5c6bc0;
-                padding: 3px 10px;
+                padding: 1px 6px;
                 border-radius: 12px;
                 font-size: 12px;
                 margin-right: 5px;
@@ -678,24 +679,24 @@ def generate_email_content(papers_with_summaries, language='zh'):
             }}
             .summary {{
                 background: #f8f9ff;
-                padding: 15px;
+                padding: 7px 10px;
                 border-left: 4px solid #667eea;
-                margin: 15px 0;
+                margin: 6px 0;
                 border-radius: 4px;
             }}
             .summary-title {{
                 font-weight: bold;
                 color: #667eea;
-                margin-bottom: 10px;
+                margin-bottom: 3px;
             }}
             .links {{
-                margin-top: 15px;
+                margin-top: 5px;
             }}
             .link-button {{
                 display: inline-block;
                 background: #667eea;
                 color: white;
-                padding: 10px 20px;
+                padding: 5px 12px;
                 text-decoration: none;
                 border-radius: 5px;
                 margin-right: 10px;
@@ -708,8 +709,8 @@ def generate_email_content(papers_with_summaries, language='zh'):
                 text-align: center;
                 color: #999;
                 font-size: 12px;
-                margin-top: 40px;
-                padding-top: 20px;
+                margin-top: 14px;
+                padding-top: 6px;
                 border-top: 1px solid #ddd;
             }}
         </style>
@@ -755,12 +756,12 @@ def generate_email_content(papers_with_summaries, language='zh'):
         # Handle bilingual summaries
         if language == 'both' and isinstance(summary, dict):
             summary_html = f"""
-                <div style="margin-bottom: 15px;">
-                    <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🇨🇳 中文摘要</div>
+                <div style="margin-bottom: 6px;">
+                    <div style="font-weight: bold; color: #667eea; margin-bottom: 3px;">🇨🇳 中文摘要</div>
                     <div>{summary.get('zh', '').replace(chr(10), '<br>')}</div>
                 </div>
                 <div>
-                    <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🇬🇧 English Summary</div>
+                    <div style="font-weight: bold; color: #667eea; margin-bottom: 3px;">🇬🇧 English Summary</div>
                     <div>{summary.get('en', '').replace(chr(10), '<br>')}</div>
                 </div>
             """
@@ -777,14 +778,13 @@ def generate_email_content(papers_with_summaries, language='zh'):
                 </div>
                 <div class="meta-item">
                     <strong>📅 {txt['published']}:</strong> {paper['published'].strftime('%Y-%m-%d %H:%M')}
+                    &nbsp; · &nbsp; <strong>{txt['quality_score']}:</strong> {paper.get('quality_score', 0):.1f}
                 </div>
                 <div class="meta-item">
                     <strong>🏷️ {txt['categories']}:</strong>
                     <div class="categories">{categories_html}</div>
                 </div>
-                <div class="meta-item">
-                    <strong>📊 {txt['quality_score']}:</strong> {paper.get('quality_score', 0):.1f}
-                </div>
+
             </div>
             
             <div class="summary">
@@ -800,8 +800,7 @@ def generate_email_content(papers_with_summaries, language='zh'):
     
     html += f"""
         <div class="footer">
-            <p>{txt['footer_auto']}</p>
-            <p>{txt['footer_powered']}</p>
+            {txt['footer_auto']} · {txt['footer_powered']}
         </div>
     </body>
     </html>
