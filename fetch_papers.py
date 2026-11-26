@@ -18,7 +18,7 @@ CATEGORIES = [
     'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
     'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
 ]
-MAX_RESULTS = 5  # Number of papers to send daily
+MAX_RESULTS = 20  # Number of papers to send daily
 MIN_PAPERS_PER_CATEGORY = 1  # Minimum papers per category to ensure balance
 
 # Language configuration

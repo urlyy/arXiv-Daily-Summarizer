@@ -109,7 +109,7 @@ CATEGORIES = [
 Edit the `MAX_RESULTS` variable in `fetch_papers.py`:
 
 ```python
-MAX_RESULTS = 5  # Number of papers to send daily
+MAX_RESULTS = 20  # Number of papers to send daily
 ```
 
 ### Modify Category Balance

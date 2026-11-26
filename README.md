@@ -110,7 +110,7 @@ CATEGORIES = [
 编辑 `fetch_papers.py` 中的 `MAX_RESULTS` 变量：
 
 ```python
-MAX_RESULTS = 5  # 每天推送的论文数量
+MAX_RESULTS = 20  # 每天推送的论文数量
 ```
 
 ### 修改领域平衡策略
