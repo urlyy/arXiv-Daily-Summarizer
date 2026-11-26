@@ -6,7 +6,7 @@
 
 ## ✨ 功能特点
 
-- 📚 **智能论文选择**：从配置的 14 个 arXiv 分类获取最新论文
+- 📚 **智能论文选择**：从配置的 5 个 arXiv 分类获取最新论文
 - 🎯 **领域平衡**：确保每个研究领域都有代表性论文
 - 🏆 **质量筛选**：基于多个质量指标对论文评分
 - 🔄 **智能去重**：自动检测并移除相似论文
@@ -79,10 +79,7 @@ cd arxiv-daily-summarizer
 直接编辑 `fetch_papers.py` 中的 `CATEGORIES`。默认配置如下，可从下表选择其他分类。
 
 ```python
-CATEGORIES = [
-    'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
-    'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
-]
+CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
 ```
 
 | 分类代码 | 研究方向 |

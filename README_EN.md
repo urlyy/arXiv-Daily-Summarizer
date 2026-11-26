@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-- 📚 **Smart Paper Selection**: Fetches latest papers from the 14 configured arXiv categories
+- 📚 **Smart Paper Selection**: Fetches latest papers from the 5 configured arXiv categories
 - 🎯 **Category Balance**: Ensures representation from each research area
 - 🏆 **Quality Filtering**: Scores papers based on multiple quality indicators
 - 🔄 **Intelligent Deduplication**: Detects and removes similar papers automatically
@@ -78,10 +78,7 @@ The system runs automatically at 8:00 AM Beijing Time daily (configurable in `.g
 Edit `CATEGORIES` in `fetch_papers.py`. The default is shown below. Choose additional categories from the table.
 
 ```python
-CATEGORIES = [
-    'cs.AI', 'cs.CV', 'cs.CL', 'cs.LG', 'cs.NE', 'cs.MA', 'cs.RO',
-    'cs.SE', 'cs.PL', 'cs.DB', 'cs.IR', 'cs.DC', 'cs.OS', 'cs.DS',
-]
+CATEGORIES = ['cs.CV', 'cs.CL', 'cs.MA', 'cs.RO', 'cs.LG']
 ```
 
 | Category | Research area |
